@@ -1,6 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { listUsers } from '../data';
+import { User } from '../interface';
 import { CheckModal } from '../pages/welcome/welcome.component';
+import { UserService } from '../service/user.service';
 
 
 @Component({
@@ -11,30 +14,36 @@ import { CheckModal } from '../pages/welcome/welcome.component';
 export class ModalInfoComponent implements OnInit {
   @Input() title?: string;
   @Input() checkModal?: CheckModal;
+  @Input() userx?: User;
+  @Input() validateForm!: UntypedFormGroup;
+  @Output() deleteUser = new EventEmitter<User>();
+  @Output() editUser = new EventEmitter<User>();
+  @Output() addUser = new EventEmitter<User>();
+
   isVisible = false;
   isConfirmLoading = false;
 
-  validateForm!: UntypedFormGroup;
-
-  submitForm(): void {
-    if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
-        }
-      });
-    }
-  }
-  constructor(private fb: UntypedFormBuilder) { }
+  constructor(private fb: UntypedFormBuilder, private user: UserService) { }
 
   ngOnInit(): void {
-     this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-    });
+  }
+
+  handleDelete() {
+    this.deleteUser.emit(this.userx);
+  }
+
+  handleEdit() {
+    if (this.validateForm.valid) {
+      this.editUser.emit(this.validateForm.value);
+      this.handleOk();
+    };
+  }
+
+  handleAdd() {
+    if(this.validateForm.valid) {
+      this.addUser.emit(this.validateForm.value);
+      this.handleOk();
+    }
   }
 
   showModal(): void {

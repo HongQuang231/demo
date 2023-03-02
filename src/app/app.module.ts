@@ -16,8 +16,6 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { ModalInfoComponent } from './modal-info/modal-info.component';
-import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 registerLocaleData(en);
 

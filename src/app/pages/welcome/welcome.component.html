@@ -5,33 +5,36 @@
   </div>
   <div>
     <span nz-icon nzType="user-add" nzTheme="outline"></span>
-    <app-modal-info [title]="title" [checkModal]="0"></app-modal-info>
+    <app-modal-info [title]="title" [checkModal]="0" (addUser)="handleAdd($event)" [validateForm]="validateForm"></app-modal-info>
   </div>
 </div>
 
 <div>
   <nz-input-group nzAddOnBefore="Email">
-    <input type="text" nz-input />
+    <input type="text" nz-input [(ngModel)]="searchText" (change)="searchByText()"/>
   </nz-input-group>
 </div>
 
-<nz-table #basicTable [nzData]="listUsers">
+<nz-table #basicTable nzShowPagination [nzPageSize]="5" [nzData]="listUsers">
   <thead>
     <tr>
       <th>ID</th>
-      <th>Name</th>
       <th>Email</th>
+      <th>Password</th>
       <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{data.id}}</td>
-      <td>{{data.name}}</td>
-      <td>{{data.email}}</td>
       <td>
-        <app-modal-info [title]="title1" [checkModal]="1"></app-modal-info>
-        <app-modal-info [title]="title2" [checkModal]="2"></app-modal-info>
+        <app-modal-info [title]="title3" [checkModal]="3"></app-modal-info>
+        {{data.id}}
+      </td>
+      <td>{{data.email}}</td>
+      <td>{{data.password}}</td>
+      <td>
+        <app-modal-info [title]="title1" [checkModal]="1" (editUser)="handleEdit($event)" [validateForm]="validateForm" [userx]="data"></app-modal-info>
+        <app-modal-info [title]="title2" [checkModal]="2" (deleteUser)="handleDelete($event)" [userx]="data"></app-modal-info>
       </td>
     </tr>
   </tbody>
