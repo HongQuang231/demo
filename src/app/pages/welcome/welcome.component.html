@@ -1,0 +1,38 @@
+<div class="welcome-header">
+  <div>
+    <span nz-icon nzType="user" nzTheme="outline"></span>
+    List Of Users
+  </div>
+  <div>
+    <span nz-icon nzType="user-add" nzTheme="outline"></span>
+    <app-modal-info [title]="title" [checkModal]="0"></app-modal-info>
+  </div>
+</div>
+
+<div>
+  <nz-input-group nzAddOnBefore="Email">
+    <input type="text" nz-input />
+  </nz-input-group>
+</div>
+
+<nz-table #basicTable [nzData]="listUsers">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.id}}</td>
+      <td>{{data.name}}</td>
+      <td>{{data.email}}</td>
+      <td>
+        <app-modal-info [title]="title1" [checkModal]="1"></app-modal-info>
+        <app-modal-info [title]="title2" [checkModal]="2"></app-modal-info>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
