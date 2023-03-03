@@ -10,11 +10,6 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
   getListUsers(): User[] {
-    localStorage.setItem('user', JSON.stringify(listUsers));
-    return listUsers;
-  }
-  pushUser(user: User): User[] {
-    listUsers.push(user);
     return listUsers;
   }
 }

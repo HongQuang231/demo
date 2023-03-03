@@ -34,7 +34,8 @@ export class WelcomeComponent implements OnInit {
     });
   }
   handleDelete(user: User) {
-    this.listUsers = this.listUsers.filter((item) => item.id !== user.id);
+    this.listUsers = JSON.parse(localStorage.getItem('user')!) && this.listUsers.filter((item) => item.id !== user.id);
+    localStorage.setItem('user', JSON.stringify(this.listUsers));
   }
 
   handleEdit(user: User) {
@@ -57,17 +58,19 @@ export class WelcomeComponent implements OnInit {
         ...user,
         id: Number(user.id)
       }
-      this.listUsers = this.users.pushUser(userx);
+      this.listUsers = JSON.parse(localStorage.getItem('user')!);
+      this.listUsers.push(userx);
       localStorage.setItem('user', JSON.stringify(this.listUsers));
       return this.listUsers;
   };
 
   searchByText() {
     if(this.searchText) {
+      this.listUsers = JSON.parse(localStorage.getItem('user')!);
       const newList = this.listUsers.map((item) => item.email.toLowerCase().includes(this.searchText.toLowerCase()) ? item : null) as unknown as User[];
       this.listUsers = newList.filter((item) => item !== null);
       return this.listUsers;
     }
-    return this.listUsers = this.users.getListUsers();
+    return this.listUsers = JSON.parse(localStorage.getItem('user')!);
   }
 }
