@@ -6,7 +6,7 @@
   <ng-template #modalTitle>Thông tin người dùng</ng-template>
 
   <ng-template #modalContent>
-    <form *ngIf="checkModal === 0" nz-form [formGroup]="guestForm" class="login-form" (ngSubmit)="handleAdd()">
+    <form *ngIf="checkModal === 0" nz-form [formGroup]="guestForm1" class="login-form" (ngSubmit)="handleAdd()">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your ID!">
           <nz-input-group nzPrefixIcon="user">
@@ -30,18 +30,18 @@
       </nz-form-item>
     </form>
 
-    <form *ngIf="checkModal === 1" nz-form [formGroup]="guestForm" class="login-form" (ngSubmit)="handleEdit()">
+    <form *ngIf="checkModal === 1" nz-form [formGroup]="guestForm2" class="login-form" (ngSubmit)="handleEdit()">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your ID!">
           <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="id" placeholder="ID" />
+            <input type="text" nz-input formControlName="id" placeholder="{{userx?.id}}"/>
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your username!">
           <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="email" placeholder="{{userx?.password}}"
+            <input type="text" nz-input formControlName="email" placeholder="{{userx?.email}}"
               [value]="userx?.password" />
           </nz-input-group>
         </nz-form-control>
@@ -49,14 +49,14 @@
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your Password!">
           <nz-input-group nzPrefixIcon="lock">
-            <input type="text" nz-input formControlName="password" placeholder="{{userx?.email}}"
+            <input type="text" nz-input formControlName="password" placeholder="{{userx?.password}}"
               [value]="userx?.email" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
     </form>
 
-    <form *ngIf="checkModal === 3" [formGroup]="guestForm" nz-form class="login-form">
+    <form *ngIf="checkModal === 3" [formGroup]="guestFormx" nz-form class="login-form">
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your ID!">
           <nz-input-group nzPrefixIcon="user">

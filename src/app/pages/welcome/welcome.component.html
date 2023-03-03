@@ -27,7 +27,7 @@
   <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td>
-        <app-modal-info [title]="title3" [checkModal]="3"></app-modal-info>
+        <app-modal-info [title]="title3" [checkModal]="3" [userx]="data"></app-modal-info>
         {{data.id}}
       </td>
       <td>{{data.email}}</td>

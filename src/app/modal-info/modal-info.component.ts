@@ -23,15 +23,29 @@ export class ModalInfoComponent implements OnInit {
 
   isVisible = false;
   isConfirmLoading = false;
-  guestForm!: FormGroup;
+  guestForm1!: FormGroup;
+  guestForm2!: FormGroup;
+  guestFormx!: FormGroup;
 
   constructor(private fb: UntypedFormBuilder, private user: UserService) { }
 
   ngOnInit(): void {
-    this.guestForm = new FormGroup({
+    this.guestForm1 = new FormGroup({
       id: new FormControl(),
       email: new FormControl(),
       password: new FormControl(),
+    });
+
+    this.guestForm2 = new FormGroup({
+      id: new FormControl({ value: String(this.userx?.id) , disabled: false}),
+      email: new FormControl({ value: this.userx?.email, disabled: false }),
+      password: new FormControl({ value: this.userx?.password, disabled: false }),
+    });
+
+    this.guestFormx = new FormGroup({
+      id: new FormControl({ value: String(this.userx?.id) , disabled: true}),
+      email: new FormControl({ value: this.userx?.email, disabled: true }),
+      password: new FormControl({ value: this.userx?.password, disabled: true }),
     });
   }
 
@@ -40,17 +54,22 @@ export class ModalInfoComponent implements OnInit {
   }
 
   handleEdit(): Observable<any> {
-    if (this.guestForm.valid) {
-      this.editUser.emit(this.guestForm.value);
+    if (this.guestForm2.valid) {
+      this.editUser.emit(this.guestForm2.value);
       this.handleOk();
     };
     return of(true);
   }
 
   handleAdd(): Observable<any> {
-    if(this.guestForm.valid) {
-      this.addUser.emit(this.guestForm.value);
+    if(this.guestForm1.valid) {
+      this.addUser.emit(this.guestForm1.value);
       this.handleOk();
+      this.guestForm1 = new FormGroup({
+        id: new FormControl({ value: "" ,disabled: false}),
+        email: new FormControl({ value: "" ,disabled: false}),
+        password: new FormControl({ value: "" ,disabled: false}),
+      });
     }
     return of(true);
   }

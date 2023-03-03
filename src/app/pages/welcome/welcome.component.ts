@@ -64,12 +64,14 @@ export class WelcomeComponent implements OnInit {
   };
 
   searchByText() {
-    if(this.searchText) {
-      const newList = this.listUsers.map((item) => item.email.toLowerCase().includes(this.searchText.toLowerCase()) ? item : null) as unknown as User[];
+    this.listUsers = listUsers;
+    if(this.searchText.trim()) {
+      const newList = this.listUsers.map((item) => item.email.toLowerCase().includes(this.searchText.trim().toLowerCase()) ? item : null) as unknown as User[];
       this.listUsers = newList.filter((item) => item !== null);
-      localStorage.setItem('user', JSON.stringify(this.listUsers));
-      return this.listUsers =JSON.parse(localStorage.getItem('user')!);
+      this.searchText ='';
+      return this.listUsers;
     }
+    this.searchText ='';
     return this.listUsers = listUsers;
   }
 }
