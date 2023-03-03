@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 import { listUsers } from '../data';
 import { User } from '../interface';
 import { CheckModal } from '../pages/welcome/welcome.component';
@@ -22,28 +23,36 @@ export class ModalInfoComponent implements OnInit {
 
   isVisible = false;
   isConfirmLoading = false;
+  guestForm!: FormGroup;
 
   constructor(private fb: UntypedFormBuilder, private user: UserService) { }
 
   ngOnInit(): void {
+    this.guestForm = new FormGroup({
+      id: new FormControl(),
+      email: new FormControl(),
+      password: new FormControl(),
+    });
   }
 
   handleDelete() {
     this.deleteUser.emit(this.userx);
   }
 
-  handleEdit() {
-    if (this.validateForm.valid) {
-      this.editUser.emit(this.validateForm.value);
+  handleEdit(): Observable<any> {
+    if (this.guestForm.valid) {
+      this.editUser.emit(this.guestForm.value);
       this.handleOk();
     };
+    return of(true);
   }
 
-  handleAdd() {
-    if(this.validateForm.valid) {
-      this.addUser.emit(this.validateForm.value);
+  handleAdd(): Observable<any> {
+    if(this.guestForm.valid) {
+      this.addUser.emit(this.guestForm.value);
       this.handleOk();
     }
+    return of(true);
   }
 
   showModal(): void {
