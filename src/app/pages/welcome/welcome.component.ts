@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, AsyncValidator } from '@angular/forms';
+import { listUsers } from 'src/app/data';
 import { User } from 'src/app/interface';
 import { UserService } from 'src/app/service/user.service';
 
@@ -20,13 +21,12 @@ export class WelcomeComponent implements OnInit {
   title1?: string = "Edit";
   title2?: string = "Delete";
   title3?: string = "Show";
-  listUsers: User[] = this.users.getListUsers();
+  listUsers: User[] = listUsers;
   searchText: any = '';
   validateForm!: UntypedFormGroup;
   constructor(private users: UserService, private fb: UntypedFormBuilder) { }
 
   ngOnInit() {
-    this.listUsers = JSON.parse(localStorage.getItem('user')!);
     this.validateForm = this.fb.group({
       id: [null, [Validators.required], [Validators.email],],
       email: [null, [Validators.required]],
@@ -58,19 +58,18 @@ export class WelcomeComponent implements OnInit {
         ...user,
         id: Number(user.id)
       }
-      this.listUsers = JSON.parse(localStorage.getItem('user')!);
       this.listUsers.push(userx);
       localStorage.setItem('user', JSON.stringify(this.listUsers));
-      return this.listUsers;
+      return this.listUsers =JSON.parse(localStorage.getItem('user')!);
   };
 
   searchByText() {
     if(this.searchText) {
-      this.listUsers = JSON.parse(localStorage.getItem('user')!);
       const newList = this.listUsers.map((item) => item.email.toLowerCase().includes(this.searchText.toLowerCase()) ? item : null) as unknown as User[];
       this.listUsers = newList.filter((item) => item !== null);
-      return this.listUsers;
+      localStorage.setItem('user', JSON.stringify(this.listUsers));
+      return this.listUsers =JSON.parse(localStorage.getItem('user')!);
     }
-    return this.listUsers = JSON.parse(localStorage.getItem('user')!);
+    return this.listUsers = listUsers;
   }
 }
