@@ -31,13 +31,13 @@
     </form>
 
     <form *ngIf="checkModal === 1" nz-form [formGroup]="guestForm2" class="login-form" (ngSubmit)="handleEdit()">
-      <nz-form-item>
+      <!-- <nz-form-item>
         <nz-form-control nzErrorTip="Please input your ID!">
           <nz-input-group nzPrefixIcon="user">
             <input type="text" nz-input formControlName="id" placeholder="{{userx?.id}}"/>
           </nz-input-group>
         </nz-form-control>
-      </nz-form-item>
+      </nz-form-item> -->
       <nz-form-item>
         <nz-form-control nzErrorTip="Please input your username!">
           <nz-input-group nzPrefixIcon="user">

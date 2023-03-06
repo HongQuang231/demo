@@ -16,6 +16,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NotifierModule } from 'angular-notifier';
 
 registerLocaleData(en);
 
@@ -33,7 +34,8 @@ registerLocaleData(en);
     NzMenuModule,
     NzTableModule,
     NzButtonModule,
-    NzModalModule
+    NzModalModule,
+    NotifierModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

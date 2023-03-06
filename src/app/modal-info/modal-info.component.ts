@@ -5,6 +5,7 @@ import { listUsers } from '../data';
 import { User } from '../interface';
 import { CheckModal } from '../pages/welcome/welcome.component';
 import { UserService } from '../service/user.service';
+import { NotifierService } from 'angular-notifier';
 
 
 @Component({
@@ -27,19 +28,19 @@ export class ModalInfoComponent implements OnInit {
   guestForm2!: FormGroup;
   guestFormx!: FormGroup;
 
-  constructor(private fb: UntypedFormBuilder, private user: UserService) { }
+  constructor(private fb: UntypedFormBuilder, private user: UserService, private notifier: NotifierService) { }
 
   ngOnInit(): void {
     this.guestForm1 = new FormGroup({
-      id: new FormControl(),
-      email: new FormControl(),
-      password: new FormControl(),
+      id: new FormControl({ value: "" ,disabled: false}, [Validators.required]),
+        email: new FormControl({ value: "" ,disabled: false}, [Validators.required, Validators.email]),
+        password: new FormControl({ value: "" ,disabled: false}, [Validators.required, Validators.minLength(8)]),
     });
 
     this.guestForm2 = new FormGroup({
-      id: new FormControl({ value: String(this.userx?.id) , disabled: false}),
-      email: new FormControl({ value: this.userx?.email, disabled: false }),
-      password: new FormControl({ value: this.userx?.password, disabled: false }),
+      // id: new FormControl({ value: String(this.userx?.id) , disabled: false}),
+      email: new FormControl({ value: this.userx?.email, disabled: false }, [Validators.required, Validators.email]),
+      password: new FormControl({ value: this.userx?.password, disabled: false }, [Validators.required, Validators.minLength(8)]),
     });
 
     this.guestFormx = new FormGroup({
@@ -55,9 +56,15 @@ export class ModalInfoComponent implements OnInit {
 
   handleEdit(): Observable<any> {
     if (this.guestForm2.valid) {
-      this.editUser.emit(this.guestForm2.value);
+      const user = {
+        id: this.userx?.id,
+        email: this.guestForm2.value.email,
+        password: this.guestForm2.value.password,
+      } as User
+      this.editUser.emit(user);
       this.handleOk();
-    };
+    }
+    else {this.notifier.notify('error', 'you dont edit user');}
     return of(true);
   }
 
@@ -66,11 +73,12 @@ export class ModalInfoComponent implements OnInit {
       this.addUser.emit(this.guestForm1.value);
       this.handleOk();
       this.guestForm1 = new FormGroup({
-        id: new FormControl({ value: "" ,disabled: false}),
-        email: new FormControl({ value: "" ,disabled: false}),
-        password: new FormControl({ value: "" ,disabled: false}),
+        id: new FormControl({ value: "" ,disabled: false}, [Validators.required]),
+        email: new FormControl({ value: "" ,disabled: false}, [Validators.required, Validators.email]),
+        password: new FormControl({ value: "" ,disabled: false}, [Validators.required, Validators.minLength(8)]),
       });
     }
+    else {this.notifier.notify('error', 'you dont edit user');}
     return of(true);
   }
 
@@ -84,7 +92,7 @@ export class ModalInfoComponent implements OnInit {
     setTimeout(() => {
       this.isVisible = false;
       this.isConfirmLoading = false;
-    }, 3000);
+    }, 1000);
   }
 
   handleCancel(): void {
