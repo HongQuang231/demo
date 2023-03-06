@@ -16,4 +16,16 @@ export class UserService {
     localStorage.setItem('user', JSON.stringify(listUsers));
     return listUsers;
   }
-}
+
+  searchByText(searchText: string, listUsers: User[]) {
+    if(JSON.parse(localStorage.getItem('user')!)) {
+      listUsers = JSON.parse(localStorage.getItem('user')!);
+    }
+    if(searchText.trim()) {
+      const newList = listUsers.map((item) => item.email.toLowerCase().includes(searchText.trim().toLowerCase()) ? item : null) as unknown as User[];
+      listUsers = newList.filter((item) => item !== null);
+      return listUsers;
+    }
+    return listUsers = this.getListUsers();
+  }
+  }

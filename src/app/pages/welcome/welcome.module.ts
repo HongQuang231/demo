@@ -13,10 +13,11 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { ModalInfoModule } from 'src/app/modal-info/modal-info.module';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NotifierModule } from 'angular-notifier';
+import { SearchTextModule } from 'src/app/search-text/search-text.module';
 
 
 @NgModule({
-  imports: [WelcomeRoutingModule, NzTableModule, CommonModule, NzButtonModule, NzGridModule, NzIconModule, NzInputModule, ModalInfoModule, FormsModule, NzAlertModule, NotifierModule.withConfig({
+  imports: [WelcomeRoutingModule, NzTableModule, CommonModule, NzButtonModule, NzGridModule, NzIconModule, NzInputModule, ModalInfoModule,SearchTextModule, FormsModule, NzAlertModule, NotifierModule.withConfig({
     position: {
       horizontal: {
         position: 'right',

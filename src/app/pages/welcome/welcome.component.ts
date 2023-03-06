@@ -73,13 +73,14 @@ export class WelcomeComponent implements OnInit {
   };
 
   searchByText() {
+    if(JSON.parse(localStorage.getItem('user')!)) {
+      this.listUsers = JSON.parse(localStorage.getItem('user')!);
+    }
     if(this.searchText.trim()) {
       const newList = this.listUsers.map((item) => item.email.toLowerCase().includes(this.searchText.trim().toLowerCase()) ? item : null) as unknown as User[];
       this.listUsers = newList.filter((item) => item !== null);
-      this.searchText ='';
       return this.listUsers;
     }
-    this.searchText ='';
     return this.listUsers = this.users.getListUsers();
   }
 }

@@ -9,11 +9,7 @@
   </div>
 </div>
 
-<div>
-  <nz-input-group nzAddOnBefore="Email">
-    <input type="text" nz-input [(ngModel)]="searchText" (change)="searchByText()"/>
-  </nz-input-group>
-</div>
+<app-search-text (searchByText)="searchByText($event)" ></app-search-text>
 
 <nz-table #basicTable nzShowPagination [nzPageSize]="5" [nzData]="listUsers">
   <thead>
