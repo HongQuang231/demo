@@ -1,0 +1,23 @@
+<form nz-form [formGroup]="formGroup" class="login-form" (ngSubmit)="handleFunc()">
+  <nz-form-item *ngIf="checkModal !==1">
+    <nz-form-control nzErrorTip="Please input your ID!">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" nz-input formControlName="id" placeholder="ID" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your email!">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" nz-input formControlName="email" placeholder="Email" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-input-group nzPrefixIcon="lock">
+        <input type="text" nz-input formControlName="password" placeholder="Password" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+</form>

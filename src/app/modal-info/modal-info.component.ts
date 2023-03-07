@@ -38,7 +38,6 @@ export class ModalInfoComponent implements OnInit {
     });
 
     this.guestForm2 = new FormGroup({
-      // id: new FormControl({ value: String(this.userx?.id) , disabled: false}),
       email: new FormControl({ value: this.userx?.email, disabled: false }, [Validators.required, Validators.email]),
       password: new FormControl({ value: this.userx?.password, disabled: false }, [Validators.required, Validators.minLength(8)]),
     });
@@ -78,7 +77,7 @@ export class ModalInfoComponent implements OnInit {
         password: new FormControl({ value: "" ,disabled: false}, [Validators.required, Validators.minLength(8)]),
       });
     }
-    else {this.notifier.notify('error', 'you dont edit user');}
+    else {this.notifier.notify('error', 'you dont add user');}
     return of(true);
   }
 

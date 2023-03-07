@@ -1,5 +1,5 @@
 <div>
   <nz-input-group nzAddOnBefore="Email">
-    <input type="text" nz-input [(ngModel)]="searchText" (change)="searchByTextComponent()"/>
+    <input type="text" nz-input #searchText (change)="searchByTextComponent(searchText.value)"/>
   </nz-input-group>
 </div>

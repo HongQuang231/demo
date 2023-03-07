@@ -7,15 +7,14 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { ModalInfoComponent } from './modal-info.component';
+import { ModalFormComponent } from './modal-form.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NotifierModule } from 'angular-notifier';
-import { ModalFormModule } from '../modal-form/modal-form.module';
 
 
 @NgModule({
-  imports: [NzTableModule, CommonModule, NzButtonModule, NzGridModule, NzIconModule, NzInputModule, NzModalModule, FormsModule, ReactiveFormsModule, NotifierModule, ModalFormModule],
-  declarations: [ModalInfoComponent],
-  exports: [ModalInfoComponent]
+  imports: [NzTableModule, CommonModule, NzButtonModule, NzGridModule, NzIconModule, NzInputModule, NzModalModule, FormsModule, ReactiveFormsModule, NotifierModule],
+  declarations: [ModalFormComponent],
+  exports: [ModalFormComponent]
 })
-export class ModalInfoModule { }
+export class ModalFormModule { }

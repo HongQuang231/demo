@@ -3,87 +3,15 @@
 </button>
 <nz-modal *ngIf="checkModal !== 2" [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent"
   [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()">
-  <ng-template #modalTitle>Thông tin người dùng</ng-template>
+  <ng-template #modalTitle>{{title}}</ng-template>
 
   <ng-template #modalContent>
-    <form *ngIf="checkModal === 0" nz-form [formGroup]="guestForm1" class="login-form" (ngSubmit)="handleAdd()">
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your ID!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="id" placeholder="ID" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your email!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="email" placeholder="Email" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input type="text" nz-input formControlName="password" placeholder="Password" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-
-    <form *ngIf="checkModal === 1" nz-form [formGroup]="guestForm2" class="login-form" (ngSubmit)="handleEdit()">
-      <!-- <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your ID!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="id" placeholder="{{userx?.id}}"/>
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item> -->
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your username!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="email" placeholder="{{userx?.email}}"
-              [value]="userx?.password" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input type="text" nz-input formControlName="password" placeholder="{{userx?.password}}"
-              [value]="userx?.email" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-
-    <form *ngIf="checkModal === 3" [formGroup]="guestFormx" nz-form class="login-form">
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your ID!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="id" placeholder="{{userx?.id}}" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your email!">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input formControlName="email" placeholder="{{userx?.email}}" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control nzErrorTip="Please input your Password!">
-          <nz-input-group nzPrefixIcon="lock">
-            <input type="text" nz-input formControlName="password" placeholder="{{userx?.password}}" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
+    <app-modal-form *ngIf="checkModal === 0" [formGroup]="guestForm1" (handleFunc)="handleAdd()"></app-modal-form>
+    <app-modal-form *ngIf="checkModal === 1" [checkModal]="1" [formGroup]="guestForm2" (handleFunc)="handleEdit()"></app-modal-form>
+    <app-modal-form *ngIf="checkModal === 3" [formGroup]="guestFormx"></app-modal-form>
   </ng-template>
 
-
   <ng-template #modalFooter>
-    <span>Modal Footer:</span>
     <button nz-button nzType="default" (click)="handleCancel()">Cancel</button>
     <button *ngIf="checkModal === 0" nz-button nzType="primary" (click)="handleAdd()"
       [nzLoading]="isConfirmLoading">Add</button>

@@ -18,10 +18,12 @@ export enum CheckModal {
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-  title?: string = "Add User";
-  title1?: string = "Edit";
-  title2?: string = "Delete";
-  title3?: string = "Show";
+  title = {
+    'add': 'Add User',
+    'edit': 'Edit',
+    'del': 'Delete',
+    'show': 'Show',
+  }
   listUsers: User[] = this.users.getListUsers();
   searchText: any = '';
   show?: boolean;
@@ -69,15 +71,13 @@ export class WelcomeComponent implements OnInit {
       this.listUsers.push(userx);
       localStorage.setItem('user', JSON.stringify(this.listUsers));
       this.notify.notify('success', 'You are awesome add user')
-      return this.listUsers =JSON.parse(localStorage.getItem('user')!);
+      return this.listUsers = this.users.getListUsers();
   };
 
-  searchByText() {
-    if(JSON.parse(localStorage.getItem('user')!)) {
-      this.listUsers = JSON.parse(localStorage.getItem('user')!);
-    }
-    if(this.searchText.trim()) {
-      const newList = this.listUsers.map((item) => item.email.toLowerCase().includes(this.searchText.trim().toLowerCase()) ? item : null) as unknown as User[];
+  searchByText(text: string) {
+    this.listUsers = this.users.getListUsers();
+    if(text.trim()) {
+      const newList = this.listUsers.map((item) => item.email.toLowerCase().includes(text.trim().toLowerCase()) ? item : null) as unknown as User[];
       this.listUsers = newList.filter((item) => item !== null);
       return this.listUsers;
     }

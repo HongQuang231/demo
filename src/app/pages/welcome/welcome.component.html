@@ -4,14 +4,13 @@
     List Of Users
   </div>
   <div>
-    <span nz-icon nzType="user-add" nzTheme="outline"></span>
-    <app-modal-info [title]="title" [checkModal]="0" (addUser)="handleAdd($event)" [validateForm]="validateForm"></app-modal-info>
+    <app-modal-info [title]="title.add" [checkModal]="0" (addUser)="handleAdd($event)" [validateForm]="validateForm"></app-modal-info>
   </div>
 </div>
 
 <app-search-text (searchByText)="searchByText($event)" ></app-search-text>
 
-<nz-table #basicTable nzShowPagination [nzPageSize]="5" [nzData]="listUsers">
+<nz-table #basicTable nzShowPagination nzShowSizeChanger [nzPageSizeOptions]="[5,10,15,20]" [nzPageSize]="5" [nzData]="listUsers">
   <thead>
     <tr>
       <th>ID</th>
@@ -23,14 +22,14 @@
   <tbody>
     <tr *ngFor="let data of basicTable.data">
       <td>
-        <app-modal-info [title]="title3" [checkModal]="3" [userx]="data"></app-modal-info>
+        <app-modal-info [title]="title.show" [checkModal]="3" [userx]="data"></app-modal-info>
         {{data.id}}
       </td>
       <td>{{data.email}}</td>
       <td>{{data.password}}</td>
       <td>
-        <app-modal-info [title]="title1" [checkModal]="1" (editUser)="handleEdit($event)" [validateForm]="validateForm" [userx]="data"></app-modal-info>
-        <app-modal-info [title]="title2" [checkModal]="2" (deleteUser)="handleDelete($event)" [userx]="data"></app-modal-info>
+        <app-modal-info [title]="title.edit" [checkModal]="1" (editUser)="handleEdit($event)" [validateForm]="validateForm" [userx]="data"></app-modal-info>
+        <app-modal-info [title]="title.del" [checkModal]="2" (deleteUser)="handleDelete($event)" [userx]="data"></app-modal-info>
       </td>
     </tr>
   </tbody>
