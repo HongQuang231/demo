@@ -7,8 +7,8 @@
 
   <ng-template #modalContent>
     <app-modal-form *ngIf="checkModal === 0" [formGroup]="guestForm1" (handleFunc)="handleAdd()"></app-modal-form>
-    <app-modal-form *ngIf="checkModal === 1" [checkModal]="1" [formGroup]="guestForm2" (handleFunc)="handleEdit()"></app-modal-form>
-    <app-modal-form *ngIf="checkModal === 3" [formGroup]="guestFormx"></app-modal-form>
+    <app-modal-form *ngIf="checkModal === 1" [formGroup]="guestForm2" (handleFunc)="handleEdit()"></app-modal-form>
+    <app-modal-form *ngIf="checkModal === 3" [checkModal]="3" [formGroup]="guestFormx"></app-modal-form>
   </ng-template>
 
   <ng-template #modalFooter>

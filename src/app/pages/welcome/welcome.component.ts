@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators, AsyncValidator } from '@angular/forms';
 import { listUsers } from 'src/app/data';
-import { User } from 'src/app/interface';
+import { SubUser, User } from 'src/app/interface';
 import { UserService } from 'src/app/service/user.service';
 import { NotifierService } from 'angular-notifier';
 
@@ -63,11 +63,11 @@ export class WelcomeComponent implements OnInit {
     }
   };
 
-  handleAdd(user: User) {
+  handleAdd(user: SubUser) {
       const userx = {
         ...user,
-        id: Number(user.id)
-      }
+        id: this.listUsers[this.listUsers.length - 1].id + 1
+      } as User;
       this.listUsers.push(userx);
       localStorage.setItem('user', JSON.stringify(this.listUsers));
       this.notify.notify('success', 'You are awesome add user')

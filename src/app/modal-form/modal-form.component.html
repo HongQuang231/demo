@@ -1,5 +1,5 @@
 <form nz-form [formGroup]="formGroup" class="login-form" (ngSubmit)="handleFunc()">
-  <nz-form-item *ngIf="checkModal !==1">
+  <nz-form-item *ngIf="checkModal ===3">
     <nz-form-control nzErrorTip="Please input your ID!">
       <nz-input-group nzPrefixIcon="user">
         <input type="text" nz-input formControlName="id" placeholder="ID" />

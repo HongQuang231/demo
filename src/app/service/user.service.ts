@@ -7,8 +7,9 @@ import { listUsers } from '../data';
   providedIn: 'root'
 })
 export class UserService {
-
   constructor(private http: HttpClient) { }
+  listUser?: User[];
+  URL: string = 'api/'
   getListUsers(): User[] {
     if(localStorage.getItem('user')) {
       return JSON.parse(localStorage.getItem('user')!);
@@ -16,4 +17,8 @@ export class UserService {
     localStorage.setItem('user', JSON.stringify(listUsers));
     return listUsers;
   }
+
+  // getList(): User[] {
+  //   this.http.get<User[]>(this.URL);
+  // }
   }

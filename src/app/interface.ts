@@ -1,5 +1,7 @@
-export interface User {
-  id: number,
+export interface SubUser {
     password: string,
     email: string,
   }
+export interface User extends SubUser  {
+  id: number,
+}
